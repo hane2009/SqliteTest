@@ -43,7 +43,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				List<InsertThread> list = new ArrayList<InsertThread>();
-				for(int i = 0 ; i < 4 ; ++i){
+				for(int i = 0 ; i < 10 ; ++i){
 					list.add(new InsertThread(MainActivity.this  , new DbHelper(MainActivity.this) , 50));
 				}
 				startThreads(list);
@@ -72,7 +72,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				List<InsertThread> list = new ArrayList<InsertThread>();
-				list.add(new InsertThread(MainActivity.this  , new DbHelper(MainActivity.this) , 10000));
+				list.add(new InsertThread(MainActivity.this  , new DbHelper(MainActivity.this) , 1000));
 				
 				List<ReadThread> rlist = new ArrayList<ReadThread>();
 				for(int i = 0 ; i < 10 ; ++i){
@@ -136,6 +136,7 @@ public class MainActivity extends Activity {
 		static AtomicInteger count = new AtomicInteger(0);
 		public DbHelper db;
 		private int insertCount;
+		private static String toinsert=new String("考了多少分就哭了是否四季咖啡的发生的发生的飞水jkjhkjljkljkl;kl;kl;cxkl;v电费水电费水电费收到发生的飞水电费收到发生的飞水电费水电费的飞水电费收到发生的飞收到发生的飞kl;kl;sdffklsdfklsdkl;fsdkl;fkl;sdfkl;sdkl;fkl;sdfkl;sdfsdakl;fkl;sdkl;fasdkl;fkl;sdfkl;sdkl;第三方圣达菲圣达菲收到飞收到飞收到发生的飞阿斯蒂芬收到发生的发生的发送飞");
 		InsertThread(Context context , DbHelper db , int insertCount){
 			setName("InsertThread#"+count.getAndIncrement());
 			this.insertCount = insertCount;
@@ -146,10 +147,12 @@ public class MainActivity extends Activity {
 		@Override
 		public void run() {
 			super.run();
-			for(int i = 0 ; i < insertCount ; ++i){
-				db.insert(getName() + System.currentTimeMillis());	
+			try{
+				for(int i = 0 ; i < insertCount ; ++i){
+					db.insert(toinsert);	
+				}
+			}finally{
 			}
-			
 		}
 	}
 	
@@ -226,4 +229,6 @@ public class MainActivity extends Activity {
 		}
 		log("finish!");
 	}
+	
+	
 }
